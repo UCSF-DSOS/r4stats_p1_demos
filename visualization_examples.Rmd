@@ -1,0 +1,35 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+
+```{r}
+library(tidyverse)
+```
+```{r}
+library(palmerpenguins)
+```
+
+```{r}
+penguins_df <- penguins
+penguins_df
+```
+
+```{r}
+penguins_df %>%
+  ggplot() +
+    geom_histogram(mapping = aes(x = bill_length_mm), bins = 15)
+```
+
+```{r}
+penguins_df %>%
+  ggplot() +
+    geom_point(mapping = aes(x = bill_length_mm, y = bill_depth_mm, color = species))
+```
+
+
+
+
+

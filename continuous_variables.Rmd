@@ -1,0 +1,48 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+
+```{r}
+library(tidyverse)
+library(palmerpenguins)
+penguins_df <- penguins
+penguins_df
+```
+
+```{r}
+penguins_df %>%
+  ggplot() +
+    geom_histogram(mapping = aes(x = body_mass_g), bins = 15)
+```
+
+```{r}
+penguins_df %>%
+  group_by(species, island) %>%
+  summarize(
+    mean_body_mass = mean(body_mass_g, na.rm = TRUE),
+    med_body_mass = median(body_mass_g, na.rm = TRUE),
+    sd_body_mass = sd(body_mass_g, na.rm = TRUE),
+    count_penguins = n()
+  )
+```
+
+```{r}
+penguins_df %>%
+  drop_na() %>%
+  group_by(species) %>%
+  summarize(
+    count_penguins = n(),
+    min_body_mass = quantile(body_mass_g, probs = 0),
+    q1_body_mass = quantile(body_mass_g, probs = 0.25),
+    med_body_mass = quantile(body_mass_g, probs = 0.5),
+    q3_body_mass = quantile(body_mass_g, probs = 0.75),
+    max_body_mass = quantile(body_mass_g, probs = 1)
+  )
+```
+
+
+
+

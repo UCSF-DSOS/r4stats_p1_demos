@@ -1,0 +1,32 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+library (palmerpenguins)
+```
+
+```{r}
+penguins_df <- penguins
+penguins_df
+```
+
+# Bar Plot
+
+```{r}
+penguins_df %>%
+  ggplot() +
+    geom_bar(mapping = aes(x = species), stat = "count") + theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+```
+
+```{r}
+penguins_df %>%
+  mutate(species = factor(species, levels = c("Chinstrap", "Adelie", "Gentoo"))) %>%
+  group_by(species) %>%
+  summarize(count = n()) %>%
+  ggplot() + 
+    geom_bar(mapping = aes(y = species, x = count), stat = "identity")
+
+```
